@@ -473,6 +473,19 @@
     }, 10000);
   }
 
+  // ── Cross-tab sync via storage listener ─────────────────
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName !== "sync" || !changes[STORAGE_KEY]) return;
+
+    // Update cache with new value
+    coursesCache = changes[STORAGE_KEY].newValue || [];
+
+    // Re-render the dropdown if it exists
+    if (dropdownMenu) {
+      populateMenu();
+    }
+  });
+
   // ── Run ─────────────────────────────────────────────────
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init, { once: true });
