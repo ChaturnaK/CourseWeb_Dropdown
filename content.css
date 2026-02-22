@@ -1,0 +1,222 @@
+/* ── CourseWeb Quick Courses — Injected Dropdown Styles ── */
+
+/* The dropdown toggle text */
+.cw-qc-dropdown .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.cw-qc-dropdown .nav-link:hover,
+.cw-qc-dropdown.show .nav-link {
+  color: #ffffff !important;
+}
+
+.cw-qc-icon {
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+/* The dropdown menu */
+.cw-qc-menu {
+  min-width: 300px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 6px 0;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+  background: #1e1e2e;
+  animation: cw-qc-fadeIn 0.15s ease-out;
+  will-change: transform, opacity;
+}
+
+@keyframes cw-qc-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Header ── */
+.cw-qc-header {
+  padding: 8px 16px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #e8a636;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 4px;
+}
+
+/* ── Course Items ── */
+.cw-qc-item {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 0;
+  transition: background 0.15s ease, opacity 0.2s ease, transform 0.2s ease;
+  contain: content;
+  user-select: none;
+}
+
+.cw-qc-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Exit animation for surgical remove */
+.cw-qc-item-removing {
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+
+/* Drag in-progress state */
+.cw-qc-item-dragging {
+  opacity: 0.4;
+  background: rgba(232, 166, 54, 0.08);
+}
+
+/* ── Drag Handle ── */
+.cw-qc-drag-handle {
+  flex-shrink: 0;
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 13px;
+  cursor: grab;
+  margin-left: 6px;
+  transition: color 0.15s ease;
+}
+
+.cw-qc-drag-handle:hover {
+  color: #e8a636;
+}
+
+.cw-qc-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Drag placeholder line */
+.cw-qc-drag-placeholder {
+  height: 2px;
+  background: #e8a636;
+  border-radius: 1px;
+  margin: 2px 12px;
+}
+
+.cw-qc-link {
+  flex: 1;
+  color: #e0e0e0 !important;
+  font-size: 13.5px;
+  padding: 8px 12px !important;
+  white-space: normal;
+  word-break: break-word;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+}
+
+.cw-qc-link:hover {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+/* Remove button */
+.cw-qc-remove {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #666;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  margin-right: 4px;
+}
+
+.cw-qc-remove:hover {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+/* ── Add This Course ── */
+.cw-qc-add {
+  color: #2ecc71 !important;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 16px !important;
+  transition: background 0.15s ease;
+}
+
+.cw-qc-add:hover {
+  background: rgba(46, 204, 113, 0.12) !important;
+  color: #27ae60 !important;
+}
+
+/* ── Saved Badge ── */
+.cw-qc-saved-badge {
+  color: #2ecc71 !important;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Empty State ── */
+.cw-qc-empty {
+  color: #888 !important;
+  font-size: 13px;
+  text-align: center;
+  padding: 16px !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cw-qc-hint {
+  color: #666 !important;
+  font-size: 11.5px;
+  text-align: center;
+  padding: 0 16px 12px !important;
+  cursor: default;
+  pointer-events: none;
+}
+
+
+
+/* ── Divider overrides ── */
+.cw-qc-menu .dropdown-divider {
+  border-color: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+
+/* ── Scrollbar ── */
+.cw-qc-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cw-qc-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cw-qc-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.cw-qc-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
