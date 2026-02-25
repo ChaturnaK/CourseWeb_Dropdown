@@ -607,6 +607,20 @@
     setupEventDelegation();
   }
 
+  // ── Hot Updates Across Tabs ─────────────────────────────
+
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "sync" && changes[STORAGE_KEY]) {
+      const newValue = changes[STORAGE_KEY].newValue || [];
+      if (JSON.stringify(newValue) !== JSON.stringify(coursesCache)) {
+        coursesCache = newValue;
+        if (dropdownMenu) {
+          populateMenu();
+        }
+      }
+    }
+  });
+
   // ── MutationObserver init ───────────────────────────────
 
   function init() {
