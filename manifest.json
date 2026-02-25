@@ -3,6 +3,11 @@
   "name": "CourseWeb Quick Courses",
   "version": "1.0.0",
   "description": "Adds a 'Courses' dropdown to CourseWeb SLIIT navbar for quick access to your tagged course pages.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "quick-courses@courseweb.sliit.lk"
+    }
+  },
   "permissions": [
     "storage",
     "activeTab"
