@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "CourseWeb Quick Courses",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Adds a 'Courses' dropdown to CourseWeb SLIIT navbar for quick access to your tagged course pages.",
   "permissions": [
     "storage",
@@ -24,6 +24,16 @@
       "run_at": "document_idle"
     }
   ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "courseweb-quick-courses@chaturnakasturiratna.dev",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
   "action": {
     "default_icon": {
       "16": "icons/icon16.png",

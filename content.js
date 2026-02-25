@@ -4,17 +4,53 @@
   const STORAGE_KEY = "cwQuickCourses";
   const CACHE_TTL = 30 * 60 * 1000; // 30 minutes for preloaded links
   const fetchedThisSession = new Set();
+  let coursesStorageAreaPromise = null;
+  let coursesStorageAreaName = "sync";
 
   // ── In-memory cache ─────────────────────────────────────
   let coursesCache = null;
   let outsideClickRegistered = false;
   let saveDebounceTimer = null;
 
+  async function getCoursesStorageArea() {
+    if (coursesStorageAreaPromise) return coursesStorageAreaPromise;
+
+    coursesStorageAreaPromise = new Promise((resolve) => {
+      const syncStorage = chrome?.storage?.sync;
+      const localStorage = chrome?.storage?.local;
+
+      if (!localStorage) {
+        throw new Error("chrome.storage.local is unavailable");
+      }
+
+      if (!syncStorage) {
+        coursesStorageAreaName = "local";
+        resolve(localStorage);
+        return;
+      }
+
+      syncStorage.get(STORAGE_KEY, () => {
+        if (chrome.runtime?.lastError) {
+          coursesStorageAreaName = "local";
+          resolve(localStorage);
+          return;
+        }
+
+        coursesStorageAreaName = "sync";
+        resolve(syncStorage);
+      });
+    });
+
+    return coursesStorageAreaPromise;
+  }
+
   /** Load courses — uses cache if available */
   async function loadCourses() {
     if (coursesCache !== null) return coursesCache;
+    const storageArea = await getCoursesStorageArea();
+
     return new Promise((resolve) => {
-      chrome.storage.sync.get(STORAGE_KEY, (data) => {
+      storageArea.get(STORAGE_KEY, (data) => {
         coursesCache = data[STORAGE_KEY] || [];
         resolve(coursesCache);
       });
@@ -25,8 +61,9 @@
   function saveCourses(courses) {
     coursesCache = courses;
     clearTimeout(saveDebounceTimer);
-    saveDebounceTimer = setTimeout(() => {
-      chrome.storage.sync.set({ [STORAGE_KEY]: courses });
+    saveDebounceTimer = setTimeout(async () => {
+      const storageArea = await getCoursesStorageArea();
+      storageArea.set({ [STORAGE_KEY]: courses });
     }, 150);
   }
 
@@ -610,7 +647,7 @@
   // ── Hot Updates Across Tabs ─────────────────────────────
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === "sync" && changes[STORAGE_KEY]) {
+    if (area === coursesStorageAreaName && changes[STORAGE_KEY]) {
       const newValue = changes[STORAGE_KEY].newValue || [];
       if (JSON.stringify(newValue) !== JSON.stringify(coursesCache)) {
         coursesCache = newValue;
