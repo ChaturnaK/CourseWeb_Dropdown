@@ -5,12 +5,13 @@
 </p>
 
 <p align="center">
-  <strong>A Chromium extension that adds a quick-access course dropdown to the SLIIT CourseWeb navbar.</strong>
+  <strong>A browser extension that adds a quick-access course dropdown to the SLIIT CourseWeb navbar.</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Manifest-V3-blue" alt="Manifest V3" />
   <img src="https://img.shields.io/badge/Chrome-Extension-green" alt="Chrome Extension" />
+  <img src="https://img.shields.io/badge/Firefox-Extension-FF7139" alt="Firefox Extension" />
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License" />
 </p>
 
@@ -29,12 +30,20 @@
 
 ## 📦 Installation
 
+### For Chrome, Edge, Brave (Chromium)
 1. **Clone or download** this repository
-2. Open Chrome → navigate to `chrome://extensions`
+2. Open your browser and navigate to `chrome://extensions` (or `edge://extensions`)
 3. Enable **Developer mode** (top-right toggle)
 4. Click **"Load unpacked"**
 5. Select the `CourseWeb_Dropdown` folder
 6. Navigate to [courseweb.sliit.lk](https://courseweb.sliit.lk) and log in
+
+### For Firefox
+1. **Clone or download** this repository
+2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`
+3. Click **"Load Temporary Add-on..."**
+4. Select the `manifest.json` file inside the `CourseWeb_Dropdown` folder
+5. Navigate to [courseweb.sliit.lk](https://courseweb.sliit.lk) and log in
 
 ---
 
@@ -102,6 +111,7 @@ CourseWeb_Dropdown/
 ## 📋 Compatibility
 
 - ✅ Google Chrome
+- ✅ Mozilla Firefox
 - ✅ Microsoft Edge
 - ✅ Brave Browser
 - ✅ Any Chromium-based browser
